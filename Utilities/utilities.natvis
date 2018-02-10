@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <Type Name="Range&lt;*&gt;">
+    <DisplayString>{{ size={stop - start} }}</DisplayString>
+    <Expand>
+      <Item Name="[size]" ExcludeView="simple">stop - start</Item>
+      <ArrayItems>
+        <Size>stop - start</Size>
+        <ValuePointer>start</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+
+
+  <Type Name="Range&lt;void&gt;">
+    <DisplayString>{{ size={(char*)stop - (char*)start} }}</DisplayString>
+    <Expand>
+      <Item Name="[size]" ExcludeView="simple">(char*)stop - (char*)start</Item>
+      <ArrayItems>
+        <Size>(char*)stop - (char*)start</Size>
+        <ValuePointer>(unsigned char*)start</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>

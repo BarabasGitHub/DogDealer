@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <Type Name="Math::Float4">
+    <DisplayString>({x}, {y}, {z}, {w})</DisplayString>
+  </Type>
+
+  <Type Name="Math::Quaternion">
+    <DisplayString>({x}, {y}, {z}, {w})</DisplayString>
+  </Type>
+
+</AutoVisualizer>
