@@ -39,7 +39,7 @@ void Reorder(Range<uint32_t const *> indices, CollisionEvents & ce)
 {
     auto size = ce.entities.size();
     // allocate enough memory to use as temporary buffer for all three vectors
-    auto data_buffer = std::make_unique<uint8_t[]>(size * std::max({sizeof(EntityPair), sizeof(Math::Float3), sizeof(Manifold), sizeof(uint8_t)}));
+    auto data_buffer = std::make_unique<uint8_t[]>(size * std::max(std::max(sizeof(EntityPair), sizeof(Math::Float3)), std::max(sizeof(Manifold), sizeof(uint8_t))));
     // copy and reorder each vector
     // entities
     auto entity_buffer = static_cast<EntityPair*>(static_cast<void*>(data_buffer.get()));

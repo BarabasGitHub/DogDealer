@@ -10,7 +10,7 @@
 
 #include "DirectX/Direct3D11.h"
 #include <d3d11shader.h>
-#include <d3dcompiler.inl>
+#include <d3dcompiler.h>
 
 #include <string>
 #include <cassert>
@@ -64,7 +64,7 @@ namespace Graphics
     {
 
         ComPtr<ID3D11ShaderReflection> reflector;
-        ThrowIfFailed( D3D11Reflect( shader_byte_code.data(), shader_byte_code.size(), reflector.GetAddressOf() ) );
+        ThrowIfFailed(D3DReflect(shader_byte_code.data(), shader_byte_code.size(), IID_ID3D12ShaderReflection, (void**)reflector.GetAddressOf()));
 
         D3D11_SHADER_DESC shader_description;
 

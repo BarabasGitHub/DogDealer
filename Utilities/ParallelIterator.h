@@ -18,8 +18,7 @@ public:
     ParallelIterator( std::tuple<IteratorType1, IteratorType2> const & in ) : std::tuple<IteratorType1, IteratorType2>( in )
     {
     }
-    reference const operator*( ) const { return std::tie( *std::get<0>(*this ), *std::get<1>(*this ) ); }
-    reference operator*( ) { return std::tie( *std::get<0>( *this ), *std::get<1>(*this ) ); }
+    reference operator*( ) const { return std::tie( *std::get<0>(*this ), *std::get<1>(*this ) ); }
     ParallelIterator& operator++( ) { ++std::get<0>( *this  ); ++std::get<1>(*this); return *this; }
     ParallelIterator operator++( int ) { auto out = *this; ++*this; return out; }
     ParallelIterator& operator--( ) { --std::get<0>(*this); --std::get<1>(*this); return *this; }
@@ -34,8 +33,7 @@ public:
     ParallelIterator& operator-=( difference_type offset ) { std::get<0>(*this) -= offset; std::get<1>(*this) -= offset; return *this; }
     ParallelIterator operator+( difference_type offset ) const { auto out = *this; return out += offset; }
     ParallelIterator operator-( difference_type offset ) const { auto out = *this; return out -= offset; }
-    reference const operator[]( difference_type offset ) const { return *( operator+( offset ) ); }
-    reference operator[]( difference_type offset ) { return *( operator+( offset ) ); }
+    reference operator[]( difference_type offset ) const { return *( operator+( offset ) ); }
 
 private:
 

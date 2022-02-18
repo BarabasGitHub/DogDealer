@@ -2,6 +2,8 @@
 #include <Conventions\Orientation.h>
 #include "Structures.h"
 
+#include <istream>
+
 namespace Animating{
 
 	class SequenceContainer

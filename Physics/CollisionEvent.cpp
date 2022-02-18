@@ -40,7 +40,8 @@ void Reorder(Range<uint32_t const *> indices, CollisionEvents & ce)
 {
     auto size = ce.bodies.size();
     // allocate enough memory to use as temporary buffer for all three vectors
-    auto data_buffer = std::make_unique<uint8_t[]>(size * std::max({sizeof(BodyPair), sizeof(Math::Float3), sizeof(Manifold), sizeof(uint8_t)}));
+    constexpr auto max_size = std::max(std::max(sizeof(BodyPair), sizeof(Math::Float3)), std::max(sizeof(Manifold), sizeof(uint8_t)));
+    auto data_buffer = std::make_unique<uint8_t[]>(size * max_size);
     // copy and reorder each vector
     // bodies
     auto entity_buffer = static_cast<BodyPair*>(static_cast<void*>(data_buffer.get()));

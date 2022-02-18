@@ -3,6 +3,7 @@
 #include "NavigationMeshContainer.h"
 
 #include <map>
+#include <string>
 
 namespace Logic{
 

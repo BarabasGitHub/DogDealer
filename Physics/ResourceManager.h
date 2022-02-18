@@ -6,6 +6,7 @@
 #include <BoundingShapes\AxisAlignedBoxHierarchyMesh.h>
 
 #include <map>
+#include <string>
 
 namespace BoundingShapes
 {

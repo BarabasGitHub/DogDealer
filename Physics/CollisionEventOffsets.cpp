@@ -4,6 +4,7 @@
 
 #include <Utilities\IntegerIterator.h>
 #include <Utilities\IntegerRange.h>
+#include <algorithm>
 
 using namespace Physics;
 
