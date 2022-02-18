@@ -28,34 +28,8 @@ namespace
         }
     };
 
-
-    bool NextDirectory( HANDLE search_handle, WIN32_FIND_DATAW & find_data )
-    {
-        auto result = FindNextFileW( search_handle, &find_data ) != 0;
-        if( result )
-        {
-            if( find_data.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY )
-            {
-                return NextDirectory( search_handle, find_data );
-            }
-        }
-        return result;
-    }
-
-
-    bool NextFile( HANDLE search_handle, WIN32_FIND_DATAW & find_data )
-    {
-        auto result = FindNextFileW( search_handle, &find_data ) != 0;
-        if( result )
-        {
-            if( find_data.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY )
-            {
-                return NextFile( search_handle, find_data );
-            }
-        }
-        return result;
-    }
-
+    bool IsDirectory(WIN32_FIND_DATAW const& find_data) { return find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY; }
+    bool IsFile(WIN32_FIND_DATAW const& find_data) { return !IsDirectory(find_data); }
 }
 
 std::vector<std::wstring> FindDirectories( std::wstring directory_name )
@@ -100,7 +74,7 @@ FileDescription GetFileDescription(std::wstring filename)
     SearchHandle search_handle = FindFirstFileExW(filename.c_str(), FindExInfoBasic, &find_data, FindExSearchNameMatch, nullptr, FIND_FIRST_EX_LARGE_FETCH);
     if(search_handle != INVALID_HANDLE_VALUE)
     {
-        if(find_data.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
+        if(IsDirectory(find_data))
         {
             auto last_write_time = TimeFromWindowsFileTime(find_data.ftLastWriteTime);
             file_description.full_name = DiscardFileName(move(filename));
@@ -127,7 +101,7 @@ void FindFiles( std::wstring filename, std::vector<FileDescription> & files )
 
     do
     {
-        if( find_data.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY )
+        if(IsFile(find_data))
         {
             auto last_write_time = TimeFromWindowsFileTime( find_data.ftLastWriteTime );
             files.emplace_back( last_write_time, path + find_data.cFileName);
