@@ -5,6 +5,7 @@
 #include <cassert>
 #include <cstdint>
 #include <limits>
+#include <cmath>
 
 #include <algorithm>
 #include <array>
